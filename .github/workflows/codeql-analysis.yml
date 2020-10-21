@@ -38,7 +38,7 @@ jobs:
 
     # If this run was triggered by a pull request event, then checkout
     # the head of the pull request instead of the merge commit.
-    - run: git checkout HEAD^2
+    - run: git checkout develop
       if: ${{ github.event_name == 'pull_request' }}
 
     # Initializes the CodeQL tools for scanning.
@@ -57,7 +57,8 @@ jobs:
     - if: matrix.language == 'java' 
       name: Build Java
       run: |
-        mvn clean install -DskipTests        
+        java -version
+        mvn -X clean install -DskipTests
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v1
